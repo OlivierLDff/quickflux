@@ -69,7 +69,7 @@ include(vendor/vendor.pri)
  3) Add import statement in your QML file
 
 ```
-import QuickFlux 1.0
+import QuickFlux 1.1
 ```
 
 Installation Instruction (without qpm)
@@ -84,7 +84,7 @@ Installation Instruction (without qpm)
  3) Add import statement in your QML file
 
 ```
-import QuickFlux 1.0
+import QuickFlux 1.1
 ```
 
 Installation Instruction (with CMake)

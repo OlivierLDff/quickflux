@@ -1,6 +1,6 @@
-import QtQuick 2.0
+import QtQuick 6.4
 import QuickFlux 1.1
-import QtQuick.Dialogs 1.2
+import QtQuick.Dialogs 6.4
 import "../actions"
 import "../stores"
 
@@ -12,7 +12,7 @@ Middleware {
         id: dialog
         title: "Confirmation"
         text: "Are you sure want to show completed tasks?"
-        standardButtons: StandardButton.Ok | StandardButton.Cancel
+        buttons: MessageDialog.Ok | MessageDialog.Cancel
 
         onAccepted: {
             next(ActionTypes.setShowCompletedTasks, {value: true});
