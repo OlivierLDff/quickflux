@@ -4,7 +4,7 @@
 #
 
 cmake_minimum_required(VERSION 3.0.0)
-project(quickflux VERSION 1.1.3)
+project(quickflux VERSION 1.1.4)
 
 option(quickflux_INSTALL "Enable the installation of targets." ON)
 
