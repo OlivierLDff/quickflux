@@ -1,6 +1,6 @@
-import QtQuick 2.0
-import QtQuick.Controls 1.3
-import QuickFlux 1.0
+import QtQuick 6.4
+import QtQuick.Controls 6.4
+import QuickFlux 1.1
 import "../actions"
 
 StackView {

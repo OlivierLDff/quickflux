@@ -1,7 +1,7 @@
-QT += core
+QT += core qmltest
 QT -= gui
 
-CONFIG += c++11
+CONFIG += c++17
 
 TARGET = quickfluxunittests
 CONFIG += console

@@ -31,12 +31,12 @@ KeyTable {
 
 static QMap<int,QString> createTypes() {
     QMap<int,QString> types;
-    types[QVariant::String] = "QString";
-    types[QVariant::Int] = "int";
-    types[QVariant::Double] = "qreal";
-    types[QVariant::Bool] = "bool";
-    types[QVariant::PointF] = "QPointF";
-    types[QVariant::RectF] = "QRectF";
+    types[QMetaType::QString] = "QString";
+    types[QMetaType::Int] = "int";
+    types[QMetaType::Double] = "qreal";
+    types[QMetaType::Bool] = "bool";
+    types[QMetaType::QPointF] = "QPointF";
+    types[QMetaType::QRectF] = "QRectF";
 
     return types;
 }
@@ -74,13 +74,13 @@ QString QFKeyTable::genHeaderFile(const QString& className)
             continue;
         }
 
-        if (types.contains(p.type())) {
-            clazz << QString("    static %2 %1;\n").arg(name).arg(types[p.type()]);
+        if (types.contains(p.userType())) {
+            clazz << QString("    static %2 %1;\n").arg(name).arg(types[p.userType()]);
 
-            if (p.type() == QVariant::PointF && !includedPointHeader) {
+            if (p.userType() == QMetaType::QPointF && !includedPointHeader) {
                 includedPointHeader = true;
                 header << "#include <QPointF>";
-            } else if (p.type() == QVariant::RectF && !includedRectHeader) {
+            } else if (p.userType() == QMetaType::QRectF && !includedRectHeader) {
                 includedRectHeader = true;
                 header << "#include <QRectF>";
             }
@@ -114,17 +114,17 @@ QString QFKeyTable::genSourceFile(const QString &className, const QString &heade
             continue;
         }
 
-        if (types.contains(p.type())) {
+        if (types.contains(p.userType())) {
             QVariant v = property(p.name());
 
-            if (p.type() == QVariant::String) {
+            if (p.userType() == QMetaType::QString) {
                 source << QString("%4 %1::%2 = \"%3\";\n")
                           .arg(className)
                           .arg(p.name())
                           .arg(v.toString())
-                          .arg(types[p.type()]);
+                          .arg(types[p.userType()]);
 
-            } else if (p.type() == QVariant::PointF) {
+            } else if (p.userType() == QMetaType::QPointF) {
                 QPointF pt = v.toPointF();
 
                 source << QString("QPointF %1::%2 = QPointF(%3,%4);\n")
@@ -133,7 +133,7 @@ QString QFKeyTable::genSourceFile(const QString &className, const QString &heade
                           .arg(pt.x())
                           .arg(pt.y());
 
-            } else if (p.type() == QVariant::RectF) {
+            } else if (p.userType() == QMetaType::QRectF) {
 
                 QRectF rect = v.toRectF();
 
@@ -151,7 +151,7 @@ QString QFKeyTable::genSourceFile(const QString &className, const QString &heade
                           .arg(className)
                           .arg(p.name())
                           .arg(v.toString())
-                          .arg(types[p.type()]);
+                          .arg(types[p.userType()]);
             }
         }
     }
@@ -172,13 +172,13 @@ void QFKeyTable::componentComplete()
     for (int i = 0 ; i < count ; i++) {
         const QMetaProperty p = meta->property(i);
         QString name(p.name());
-        if (p.type() != QVariant::String ||
+        if (p.userType() != QMetaType::QString ||
             name == "objectName") {
             continue;
         }
 
         QVariant v = property(p.name());
-        if (!v.isNull()) {
+        if (!v.toString().isEmpty()) {
             continue;
         }
 

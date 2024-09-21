@@ -125,7 +125,7 @@ void QFHydrate::rehydrate(QObject *dest, const QVariantMap &source)
         QVariant value = source[iter.key()];
 
         if (orig.canConvert<QObject*>()) {
-            if (value.type() != QVariant::Map) {
+            if (value.userType() != QMetaType::QVariantMap) {
                 qWarning() << QString("Hydrate.rehydrate: expect a QVariantMap property but it is not: %1");
             } else {
                 rehydrate(orig.value<QObject*>(), value.toMap());

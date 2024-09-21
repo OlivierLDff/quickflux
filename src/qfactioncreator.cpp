@@ -15,7 +15,7 @@ For example, you may declare an ActionCreator based component as:
 
 \code
 import QtQuick 2.0
-import QuickFlux 1.0
+import QuickFlux 1.1
 pragma singleton
 
 ActionCreator {
@@ -27,7 +27,7 @@ It is equivalent to:
 
 \code
 import QtQuick 2.0
-import QuickFlux 1.0
+import QuickFlux 1.1
 pragma singleton
 
 Item {
@@ -50,7 +50,7 @@ QString QFActionCreator::genKeyTable()
 
     imports << "pragma Singleton"
             << "import QtQuick 2.0"
-            << "import QuickFlux 1.0\n";
+            << "import QuickFlux 1.1\n";
 
     header << "KeyTable {\n";
 
